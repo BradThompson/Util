@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartArguments>ao date: /date, ddate: /ddate, time: /time, dtime: /dtime, datetime: /datetime, ddatetime: /ddatetime, extra: /time</StartArguments>
+  </PropertyGroup>
+</Project>

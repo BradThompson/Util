@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <StartArguments>/f:"C:\Tmp\EdCapTmp\job_GenerateEdCapReports.sql" /s:E:\Exports\EdCap\Faculty /r:\\edcc.ctc.edu\shares\EDCAP%24\Faculty /go /q</StartArguments>
+  </PropertyGroup>
+</Project>

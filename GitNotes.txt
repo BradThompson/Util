@@ -1,0 +1,258 @@
+In order to enlist in the Github EdmondsCC project:
+MD C:\GitRoot      (Can be any name)
+CD C:\GitRoot
+git clone https://github.com/EdmondsCC/EdmondsCC.git .
+git clone https://github.com/EdmondsCC/ADS.git .
+
+My UTIL directory and all source is located at https://github.com/BradThompson/Util.git
+
+Personally , the local directory for my git enlistment is C:\EdmondsCC.
+
+In any documentation that I have in a ReadMe file or for regular documentation,
+I will use <GitRoot> in place of the local root enlistment. e.g. C:\GitRoot.
+
+If you find your self in a directory that is enlisted but you don't know the origin:
+git config --get remote.origin.url
+The following will give you the full state of the remote and local branches:
+git remote show origin
+
+Besides the EdmondsCC enlistment, I have my own public enlistment for utilities:
+https://github.com/BradThompson/Util.git
+You can create your own projects by going to http://github and creating one.
+
+Here is an awesome web site with everything you need to know about git. It includes
+beginner videos:
+        
+
+The following areas are separated with ===. They are freeform thoughts or issues that I
+have come across that I wanted to put into words instead of looking them up on the internet.
+
+===============
+Using branches is the best way to work with git. Create a branch and switch to it.
+Make changes, commit often, push your branch. 100 times a day isn't to much!
+Once it is ready to be put into the main branch do the following:
+Make sure your files in your branch are commited and pushed remotely.
+Life cycle of a branch:
+git branch MyBranch
+git switch MyBranch     (if you want to do this as one step: git checkout -b MyBranch)
+
+Edit, commit, edit, commit, edit, commit, push branch. Repeat
+
+Code review the changes as they are made or in one lump sum. Do whatever you want
+to get approved to incorporate your changes into master. This is entirely up to
+the policy of the group.
+The master branch should always have the code that has been deployed to production.
+If there is anything else, be sure to document it as WIP code, preferably with a
+README.TXT at the root of the project. (<GitRoot>\
+
+Make sure all files are commited within your branch
+git checkout master
+git pull                -- Get's most recent changes that have made it to remote master
+git checkout MyBranch
+git rebase or merge master       -- Handle merge conflicts (if any)
+git checkout master
+git rebase MyBranch     -- Should be no conflicts, since you've already handled them
+
+This will combine all your commits into one commit for master.
+If you want to keep all the individual commits for history in master (not recommended),
+then use git merge MyBranch instead.
+
+You are now finished. You can repeat the above steps for your next project. If you are
+not finished with your current work, just use your old branch as normal. Once you are again
+at another checkpoint repeat the above steps.
+
+It is important to merge the master branch into your own project once in a while. This will
+allow you to have minimal conflicts once you are ready to incorporate your changes into
+the master branch.
+
+If you and one or more co-workers are working on the same issue, then it is recommended
+that you work together in one branch. If this is not feasible, create separate branches.
+Rebase or merge into these new branches before finally rebasing into master.
+===============
+You can change the way lines endings are dealt with during check in with:
+git config --global core.autocrlf true
+===============
+When pushing changes from your local branch to origin for the first time:
+git push --set-upstream origin MyBranchName
+You don't have to memorize this. git will remind you if you try to push a branch that
+doesn't have a corresponding remote branch.
+Once you have pushed a branch remotely, then you can simply use:
+git push
+This is the same ommand for the master branch.
+===============
+Getting a branch from remote onto your machine. Author of branch pushes the branch as above.
+This will make the available remotely.
+
+git fetch                                       ( Fetches state of origin (remote server) )
+git checkout --track origin/MyBranchName        ( Use foward slash not backslash )
+    or if you want a different name for the local branch:
+git checkout -b MyBranchNameLocal --track origin/MyBranchName
+
+===============
+If you want to save copies of your work temporarily without checking it in, use:
+git stash
+git stash pop
+git stash list
+and
+git stash clear     -- Deletes ALL stashes.
+This will allow you to quickly jump back and forth between branches.
+In practice, it works well for small stuff, but be careful, It does require a
+merge if the popped files are different. Best usage:
+I am working in MyBranch.
+Some super high priority project comes in.
+git add -A
+git stash
+git checkout HighPriorityBranch or master. I do not recommend making these changes in the current branch.
+edit, commit, push, rebase, etc as listed above under branches.
+git checkout the branch you were working on.
+git stash pop
+
+===============
+ReadMe.txt - Simple text file of changes.
+You also have the ability to create a MarkDown text file that can be translated by
+Visual Studio (or other tool).  The MarkDown syntax is human readable but will look
+like HTML markup when viewed with the right tool.
+For example: Readme.MD
+MD stands for "Mark Down". See the cheat sheet at:
+See https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+Minimalist editors:
+http://markdown.pioul.fr/
+https://stackedit.io/app
+Do not use MarkDownPad. It crashed the  first time I attempted to use it, and it
+installed in the wrong place.
+===============
+If you've done something rather rash and commited changes to the local master that you
+don't want in the remote master then contact me. I'll be doing something like the following:
+
+git commit add -A
+git commit -m "Saving my work, just in case"
+git branch my-saved-work        -- This creates a new branch with the work you've saved.
+git check master
+git fetch origin        (Don't do pull)
+Change directory to the root of the enlistment e.g. cd c:\EdmondsCC
+git reset --hard origin/master      -- This resets all changes back to the remote master branch.
+
+If you've checked in changes to the master branch and pushed them remotely, then we
+will have to work together to revert to an older check in date prior to your changes.
+
+
+===============
+Use:
+git diff 
+or
+git diff --staged
+This will get you a difference for the files that have been staged but not commited.
+===============
+Comparing two branches:
+git diff master..otherbranch
+===============
+The commit message you created with your last check in will be in <GIT_ROOT>\.git\COMMIT_EDITMSG
+===============
+You can completely delete all changes you've put into a branch with the following:
+# Revert changes to modified files.
+git reset --hard
+# Remove all untracked files and directories. (`-f` is `force`, `-d` is `remove directories`)
+git clean -fd
+===================
+We use <origin> for our remote repo.
+
+Deleting a branch:
+git branch -d "Branch Name"
+
+If you get an error stating that this hasn't been sync with remote, then you can use:
+git branch -D "Branch Name"
+Be cautious. This will leave a remote branch that has no representation on your hard drive.
+
+Deleting a remote branch is counter intuitive:
+git push origin --delete <branch_name>
+
+In all other git instances of this project, do the following:
+git fetch --all --prune
+git gc
+
+===============
+Two ways to limit commit to one comment message:
+git merge --squash feature1
+or 
+git rebase -i
+
+I prefer the first one.
+===============
+You can change the way lines endings are dealt with during check in with:
+git config --global core.autocrlf true
+===============
+Use:
+git stash
+git stash pop
+git stash list
+and
+git stash clear
+This will allow you to quickly jump back and forth between branchses without having to create a new temporary branch.
+In practice, it works well for small stuff, but be careful, It does require a merge if the popped files are different.
+Very useful if you've made changes, but then decided they have to be made in another branch.
+===============
+Branches
+Gets a list of all branches stored locally:
+git branch
+
+When working with remote servers it is best to start with git fetch
+
+Gets a list of all branches on the remote (origin) server:
+git branch -r   -- Gets the list of branches on the remote server
+
+Get a branch that is stored remotely but not on your local machine:
+git checkout -b <my_new_branch> <remote>/<branch_name>
+
+Deleting a local branch:
+git branch -d MyBranchName              -- Deletes local copy of the branch
+or 
+git branch -D MyBranchName              -- This ignores the sync state of the remote branch, forcing the local branch to be deleted.
+
+Deleting a remote branch:
+git push origin --delete MyBranchName   -- Check to see if the branch is actually on remote first
+
+If you only delete the local branch, it will still be on the remote server. You or someone
+else can still pull this branch down.
+You can also delete a remote branch without deleting the local branch.
+
+Create a branch locally:
+git checkout -b MyBranchName
+or
+git branch MyBranchName
+git switch MyBranchName
+
+Pushing the branch remotely
+git push origin MyBranchName
+or
+git push --set-upstream origin MyBranchName
+We use <origin> for our remote repo.
+Once this is done, a simple git push will work.
+
+Deleting a branch:
+git branch -d "Branch Name"
+
+If you get an error stating that this hasn't been sync with remote, then you can use:
+git branch -D "Branch Name"
+Be cautious. This will leave a remote branch that has no representation on your hard drive.
+
+Deleting a remote branch is counter intuitive:
+git push origin --delete <branch_name>
+
+
+Be careful using git stash! It's useful for small sets of files but seems to break
+down with larger sets of files or files that are not tracked.
+Best Practice:
+Git add -A
+git stash
+Do whatever you need. Checkout other branches, write code, etc.
+Git stash pop
+Untracked files will now be staged, but you can unstage using:
+git reset HEAD <file>...
+avoid editing the same files that are located in stash (use git stash list)
+
+============================
+If you find that git won't do a diff, even though you KNOW the file has changed, see the various items under:
+https://stackoverflow.com/questions/14564946/git-status-shows-changed-files-but-git-diff-doesnt
+One of the answers solved my issue. I was using the wrong version of diff.exe. Once I fixed the system
+to use the proper version of git, it worked fine. The correct version of git comes from
+"C:\Program Files\Git\usr\bin\diff.exe"

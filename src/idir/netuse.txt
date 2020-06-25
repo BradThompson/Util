@@ -1,0 +1,14 @@
+New connections will be remembered.
+
+
+Status       Local     Remote                    Network
+
+-------------------------------------------------------------------------------
+             R:        \\edcc.ctc.edu\shares\rdrive 
+                                                Microsoft Windows Network
+             U:        \\edcc.ctc.edu\shares\udrive 
+                                                Microsoft Windows Network
+OK           Y:        \\BetaStaging12\C$        Microsoft Windows Network
+OK           Z:        \\BetaStaging12\E$        Microsoft Windows Network
+The command completed successfully.
+

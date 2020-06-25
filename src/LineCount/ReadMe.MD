@@ -1,0 +1,1 @@
+Reads the number of lines in a file snd outputs it.

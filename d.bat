@@ -1,0 +1,2 @@
+set DirCmd=/ogn
+dir %*
