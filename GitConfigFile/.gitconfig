@@ -1,0 +1,102 @@
+[user]
+    name = Brad Thompson
+    email = brad.thompson@email.edcc.edu
+[core]
+    # Typically used for editing GIT_ROOT\.git\COMMIT_EDITMSG file.
+    # editor = notepad++.exe
+    editor = nlf.bat
+    # Checkout Windows-style, commit Unix-style
+	autocrlf = true
+    # Private excludes file.
+    excludesfile = .git/.user_gitignore
+#    safecrlf = false
+    whitespace = cr-at-eol
+    
+[alias]
+    a = config --global --list
+    alias = config --global --list
+    b = branch
+    bl = branch --list
+    bol = !git for-each-ref --sort='authordate:iso8601' --format='%(refname)' refs/heads | sed -e 's-refs/heads/--'
+    bov = !git for-each-ref --sort='authordate:iso8601' --format='%(authordate:iso8601)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'
+    brol = !git for-each-ref --sort='authordate:iso8601' --format=' %(authordate:iso8601)%09%(refname)' refs/remotes/origin | sed -e 's-refs/remotes/origin/--'
+    co = checkout
+    com = checkout master
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+    ignore = "!f() { echo Look at .git/info/exclude or c:/am/.gitignore_global; }; f"
+    last = log -1 --pretty=format:"%ai - %h - %s"
+    lastn =  "!f() { git log -n$1 --pretty=format:\"%ai - %h - %an - %s\"; }; f"
+    lol = log --oneline --graph --decorate
+    s = !git branch && git status
+    undo = "!f() { echo Use git checkout filename_to_undo for unstaged files; }; f"
+    p = pull -q
+    dt = difftool
+    mt = mergetool
+    
+[diff]
+    tool = vsdiffmerge
+
+[difftool]
+      prompt = false
+      
+[difftool "vsdiffmerge"]
+      cmd = '"C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer/vsDiffMerge.exe"' "$LOCAL" "$REMOTE" //t
+      keepbackup = false
+      trustexitcode = true
+      
+[merge]
+    tool = vsdiffmerge
+[mergetool "vsdiffmerge"]
+    cmd = \"C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/Common7/IDE/CommonExtensions/Microsoft/TeamFoundation/Team Explorer/vsDiffMerge.exe\" \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\" //m
+[mergetool]
+    prompt = false
+
+# [diff]
+#     tool = bc3
+# [difftool]
+#     prompt = false
+# [difftool "bc3"]
+#     cmd = \"c:/program files (x86)/beyond compare 3/bcomp.exe\" \"$LOCAL\" \"$REMOTE\"
+# [merge]
+#     tool = bc3
+# [mergetool]
+#     prompt = false
+#     keepBackup = false
+# [mergetool "bc3"]
+#     cmd = \"c:/program files (x86)/beyond compare 3/bcomp.exe\" \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+#     trustExitCode = true
+    
+[gui]
+    
+[push]
+    default = simple
+    
+[credential]
+	helper = manager
+    
+[color "diff"]
+    meta = blue black bold
+
+# [merge]
+#     tool = kdiff3
+#     
+# [mergetool "kdiff3"]
+#     path = C:/Program Files/KDiff3/kdiff3.exe
+#     trustExitCode = false
+#     
+# [diff]
+#     guitool = kdiff3
+#     
+# [difftool "kdiff3"]
+#     path = C:/Program Files/KDiff3/kdiff3.exe
+#     trustExitCode = false
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+    required = true
+[winUpdater]
+	recentlySeenVersion = 2.25.0.windows.1
+[http]
+	postBuffer = 524288000
